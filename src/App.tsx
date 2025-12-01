@@ -5,11 +5,8 @@ import MobileDevelopment from './components/MobileDevelopment';
 import AIAgents from './components/AIAgents';
 import DigitalMarketing from './components/DigitalMarketing';
 import Footer from './components/Footer';
-
-import ResponsiveDesignPage from './components/pages/responsive-desing';
-import LightningFastPage from './components/pages/lightning-fast';
-import ModernUIPage from './components/pages/modern-ui';
-import SecureReliablePage from './components/pages/secure-reliable';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsOfService from './components/TermsOfService';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -31,10 +28,8 @@ export default function App() {
             </>
           }
         />
-        <Route path="/web-development/responsive-design" element={<ResponsiveDesignPage />} />
-        <Route path="/web-development/lightning-fast" element={<LightningFastPage />} />
-        <Route path="/web-development/modern-ui" element={<ModernUIPage />} />
-        <Route path="/web-development/secure-reliable" element={<SecureReliablePage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
       </Routes>
     </>
   );

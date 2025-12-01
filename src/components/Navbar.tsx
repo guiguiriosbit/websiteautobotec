@@ -19,19 +19,19 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           <div className="flex items-center space-x-1 cursor-pointer" onClick={() => scrollToSection('home')}>
-            <Bot className="w-8 h-8 md:w-10 md:h-10 text-blue-700" />
-            <span className="text-xl md:text-2xl font-bold text-gray-800">Autobotec</span>
+            <Bot className="w-10 h-10 md:w-15 md:h-15 text-blue-700" />
+            <span className="text-xl md:text-3xl font-bold text-gray-800">Autobotec</span>
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            <FileCode2 className="w-4 h-4 md:w-10 md:h-10 text-blue-700" />
+            <FileCode2 className="w-4 h-4 md:w-10 md:h-10 text-green-700" />
             <button
               onClick={() => scrollToSection('web-development')}
               className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
             >
               {language === 'es' ? 'Desarrollo Web' : 'Web Development'}
             </button>
-            <Smartphone className="w-4 h-4 md:w-10 md:h-10 text-blue-700" />
+            <Smartphone className="w-4 h-4 md:w-10 md:h-10 text-fuchsia-700" />
             <button
               onClick={() => scrollToSection('mobile-development')}
               className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
@@ -45,7 +45,7 @@ export default function Navbar() {
             >
               {language === 'es' ? 'Agentes IA' : 'AI Agents'}
             </button>
-            <QrCode className="w-4 h-4 md:w-10 md:h-10 text-blue-700" />
+            <QrCode className="w-4 h-4 md:w-10 md:h-10 text-orange-700" />
             <button
               onClick={() => scrollToSection('digital-marketing')}
               className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
@@ -120,7 +120,7 @@ export default function Navbar() {
 
             <button
               onClick={() => scrollToSection('web-development')}
-              className="block w-full text-left px-2 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors rounded-lg"
+              className="block w-full text-left px-2 py-2 text-gray-700 hover:bg-green hover:text-green transition-colors rounded-lg"
             >
               {language === 'es' ? 'Desarrollo Web' : 'Web Development'}
             </button>

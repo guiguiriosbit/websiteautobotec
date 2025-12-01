@@ -1,29 +1,38 @@
 import { Target, Search, BarChart3, Mail } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useState } from 'react';
+import FeatureModal from './modals/FeatureModal';
+import ContactFormModal from './modals/ContactFormModal';
 
 export default function DigitalMarketing() {
+  const { t } = useLanguage();
+  const [selectedFeature, setSelectedFeature] = useState<string | null>(null);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const [contactFormFeatures, setContactFormFeatures] = useState<Array<{
+    id: string;
+    labelEn: string;
+    labelEs: string;
+  }>>([]);
+
   const services = [
     {
+      id: 'strategic',
       icon: Target,
-      title: 'Strategic Planning',
-      description: 'Comprehensive marketing strategies tailored to your business goals and target audience.',
       bgImage: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80'
     },
     {
+      id: 'seo',
       icon: Search,
-      title: 'SEO & SEM',
-      description: 'Optimize your online presence and drive qualified traffic to your digital properties.',
       bgImage: 'https://images.unsplash.com/photo-1562577309-2592ab84b1bc?w=800&q=80'
     },
     {
+      id: 'analytics',
       icon: BarChart3,
-      title: 'Analytics & Insights',
-      description: 'Data-driven insights to measure ROI and optimize your marketing campaigns.',
       bgImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80'
     },
     {
+      id: 'email',
       icon: Mail,
-      title: 'Email Marketing',
-      description: 'Engage your audience with personalized email campaigns that convert.',
       bgImage: 'https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=800&q=80'
     },
   ];
@@ -32,11 +41,11 @@ export default function DigitalMarketing() {
     <section id="digital-marketing" className="py-16 md:py-24 bg-gradient-to-br from-blue-50 to-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
-            Digital Marketing
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 md:mb-6">
+            {t('marketing.title')}
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            Amplify your brand's reach and drive measurable growth with our comprehensive digital marketing solutions.
+          <p className="text-lg md:text-xl text-slate-700 max-w-3xl mx-auto">
+            {t('marketing.subtitle')}
           </p>
         </div>
 
@@ -44,7 +53,11 @@ export default function DigitalMarketing() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="relative rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 overflow-hidden group"
+              onClick={() => setSelectedFeature(service.id)}
+              tabIndex={0}
+              role="button"
+              aria-label={t(`${service.id}.title`)}
+              className="relative rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 overflow-hidden group cursor-pointer outline-none focus:ring-4 focus:ring-orange-400"
             >
               {/* Imagen de fondo */}
               <div 
@@ -55,16 +68,19 @@ export default function DigitalMarketing() {
               ></div>
               
               {/* Overlay naranja/rojo semi-transparente */}
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-600 to-red-600 opacity-70 group-hover:opacity-70 transition-all"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-600 to-red-600 opacity-50 group-hover:opacity-30 transition-all backdrop-blur-[2px]"></div>
               
               {/* Contenido */}
-              <div className="relative z-10 p-6 md:p-8">
-                <service.icon className="w-10 h-10 md:w-12 md:h-12 text-white mb-4 drop-shadow-lg" />
-                <h3 className="text-xl md:text-2xl font-semibold text-white mb-3">
-                  {service.title}
+              <div className="relative z-10 p-6 md:p-8 flex flex-col items-center">
+                <service.icon className="w-10 h-10 md:w-12 md:h-12 text-white mb-4 drop-shadow-lg group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="text-xl md:text-2xl font-semibold text-white mb-3 group-hover:underline">
+                  {t(`${service.id}.title`)}
                 </h3>
-                <p className="text-orange-50 leading-relaxed">
-                  {service.description}
+                <p className="text-white font-medium leading-relaxed">
+                  {t(`${service.id}.description`)}
+                </p>
+                <p className="text-orange-200 font-bold mt-4 group-hover:underline">
+                  {t('learnMore')} →
                 </p>
               </div>
             </div>
@@ -87,7 +103,7 @@ export default function DigitalMarketing() {
             {/* Contenido */}
             <div className="relative z-10 p-6 md:p-8">
               <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-                Our Marketing Channels
+                {t('marketing.channels')}
               </h3>
               <ul className="space-y-4">
                 {[
@@ -124,26 +140,61 @@ export default function DigitalMarketing() {
             {/* Contenido */}
             <div className="relative z-10 p-6 md:p-8 text-white">
               <h3 className="text-2xl md:text-3xl font-bold mb-6">
-                Why Choose Us?
+                {t('marketing.why')}
               </h3>
               <div className="space-y-6">
                 <div>
                   <div className="text-3xl md:text-4xl font-bold mb-2">500+</div>
-                  <p className="text-orange-100">Successful Campaigns</p>
+                  <p className="text-orange-100">{t('marketing.campaigns')}</p>
                 </div>
                 <div>
                   <div className="text-3xl md:text-4xl font-bold mb-2">98%</div>
-                  <p className="text-orange-100">Client Satisfaction</p>
+                  <p className="text-orange-100">{t('marketing.satisfaction')}</p>
                 </div>
                 <div>
                   <div className="text-3xl md:text-4xl font-bold mb-2">3x</div>
-                  <p className="text-orange-100">Average ROI Increase</p>
+                  <p className="text-orange-100">{t('marketing.roi')}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Botón de Solicitar Información */}
+        <div className="mt-12 md:mt-16 text-center">
+          <button
+            onClick={() => {
+              setContactFormFeatures([
+                { id: 'strategic', labelEn: 'Strategic Planning', labelEs: 'Planificación Estratégica' },
+                { id: 'seo', labelEn: 'SEO & SEM', labelEs: 'SEO y SEM' },
+                { id: 'analytics', labelEn: 'Analytics & Insights', labelEs: 'Analítica e Información' },
+                { id: 'email', labelEn: 'Email Marketing', labelEs: 'Email Marketing' },
+              ]);
+              setIsContactFormOpen(true);
+            }}
+            className="inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-orange-600 to-red-600 text-white font-semibold rounded-lg hover:from-orange-700 hover:to-red-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            <Mail className="w-6 h-6" />
+            <span className="text-lg">{t('requestInfo')}</span>
+          </button>
+
+          {/* Modal de contacto */}
+          <ContactFormModal
+            isOpen={isContactFormOpen}
+            onClose={() => setIsContactFormOpen(false)}
+            features={contactFormFeatures}
+          />
+        </div>
       </div>
+
+      {/* Modals */}
+      {selectedFeature && (
+        <FeatureModal
+          isOpen={!!selectedFeature}
+          onClose={() => setSelectedFeature(null)}
+          featureId={selectedFeature}
+        />
+      )}
     </section>
   );
 }
