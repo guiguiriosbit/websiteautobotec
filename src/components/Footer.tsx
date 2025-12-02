@@ -1,7 +1,10 @@
 
+import { useState } from 'react';
 import { Bot, Mail, Phone, MapPin, Facebook, Twitter, Instagram } from 'lucide-react';
+import TeamModal from './modals/TeamModal';
 
 export default function Footer() {
+  const [isTeamModalOpen, setIsTeamModalOpen] = useState(false);
 
   const year = new Date().getFullYear();
   const scrollToSection = (id: string) => {
@@ -104,7 +107,11 @@ export default function Footer() {
             <p className="text-gray-400 mb-4 leading-relaxed">
               A passionate group of developers, designers, and strategists dedicated to creating exceptional digital experiences.
             </p>
-            <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <button
+              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              onClick={() => setIsTeamModalOpen(true)}
+              aria-label="Join Our Team"
+            >
               Join Our Team
             </button>
           </div>
@@ -126,6 +133,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      <TeamModal isOpen={isTeamModalOpen} onClose={() => setIsTeamModalOpen(false)} />
     </footer>
   );
 }
